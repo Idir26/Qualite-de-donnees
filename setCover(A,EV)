@@ -1,0 +1,28 @@
+# Recherche des couvertures minumales d'un attribut A
+## 'SCA' est un set contenant les couvertures minimales de A
+## 'DIA' est un set contenant les ensembles des differences modulo A
+## 'candidates' est un set contenant les attributs eligibles à la couverture minimale pour A
+
+def setCover(A,EV):
+    SCA = set()
+    DIA = set()
+    candidates = set() 
+    
+    for elem in EV:
+        #Creation d'un subset pour chaque element de EV
+        subsetEV=set(elem)
+        #Selection des elements contenant A
+        
+        if "A" in subsetEV :
+            subsetEV.difference_update('A')  #On retire A des subsets
+            DIA.add(frozenset(subsetEV))     #On ajoute les subsets a DIA
+            #Selection des candidats
+            for attr in subsetEV :
+                    candidates.add(attr)
+    
+    #Recherche des couvertures minimales pour A parmi les candidats
+    for attr in candidates:
+        if all(attr in subset for subset in DIA): #On verifie que attr est dans tous les subsets de DIA
+            SCA.add(attr)
+
+    return  SCA
