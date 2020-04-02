@@ -1,0 +1,35 @@
+candidates={'B', 'C', 'D'}
+
+def createTree(candidates):
+
+    #Fonction recursive de parcours de l'arbre
+    ##'combination' est un ensemble d'attributs visites dans la branche 
+    ##'candidates' est un ensemble d'attributs non visites dans la branche
+    def rec_tree(combination, candidates,debug):
+        
+        combinations.append(combination)
+        print(debug,combinations)
+        
+        if candidates: #Si candidates est non vide
+            print(debug,"C:",combination,"c:",candidates)
+            
+            for i in range(len(candidates)):
+                #Ajout du prochain candidat non visite de la branche a la combinaison
+                next_combination = combination + candidates[i]
+                #Appel recursif avec la nouvelle combinaison
+                print(debug,"N:",next_combination)
+                rec_tree(next_combination, candidates[i + 1:],debug+"   ")
+            
+    #Transformation du 'set' en 'list' et tri par ordre alphabetique des attributs
+    candidates=list(candidates)
+    candidates.sort()
+    #Liste des combinaisons d'attributs visitees
+    combinations = []
+    
+    for i in range(len(candidates)):
+        #Parcours de l'arbre pour le candidat actuel
+        rec_tree(candidates[i], candidates[i+1:],"")
+
+    return combinations
+
+print(createTree(candidates))
