@@ -7,8 +7,8 @@ def createTree(candidates):
     ##'candidates' est un ensemble d'attributs non visites dans la branche
     def rec_tree(combination, candidates,debug):
         
-        combinations.append(combination)
-        print(debug,combinations)
+        tree.append(combination)
+        print(debug,tree)
         
         if candidates: #Si candidates est non vide
             print(debug,"C:",combination,"c:",candidates)
@@ -23,13 +23,13 @@ def createTree(candidates):
     #Transformation du 'set' en 'list' et tri par ordre alphabetique des attributs
     candidates=list(candidates)
     candidates.sort()
-    #Liste des combinaisons d'attributs visitees
-    combinations = []
+    #Liste representant l'arbre en DFS
+    tree = []
     
     for i in range(len(candidates)):
         #Parcours de l'arbre pour le candidat actuel
         rec_tree(candidates[i], candidates[i+1:],"")
 
-    return combinations
+    return tree
 
 print(createTree(candidates))
